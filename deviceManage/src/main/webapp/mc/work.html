@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- Bootstrap -->
+<link type="text/css"
+	href="console/js/static/plugins/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap-table.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="mc/assets/js/main.js"></script>
+<!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+<!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap-table.min.js"></script>
+	
+
+	</head>
+	<style>
+		body {
+			width: 1024px;
+			height: 768px;
+		}
+	</style>
+
+	<body>
+		<div class="gd_top" style="height: 6.5%;background-color: rgb(153,153,153);"></div>
+		<div class="mc_workmanage" style="height: 668px;">
+			<div class="mc_workmanage_top" style="height: 7%;text-align:center">
+				<div style="overflow:hidden; display:inline-block"><img style="float:left;margin-top: 7px;" src="assets/css/images/tb.png"><span style="float:left;margin-top: 17px;">工单管理</span></div>
+			</div>
+			<div class="mc_workmanage_center" style="height: 68%;<!--background-color: pink;-->">
+
+				<div style="text-align:center">
+
+					<!-- Nav tabs -->
+					<ul id="myTab" class="nav nav-tabs" role="tablist" style="overflow:hidden; display:inline-block;">
+						<li role="presentation">
+							<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+						</li>
+						<li role="presentation">
+							<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+						</li>
+						<li role="presentation">
+							<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+						</li>
+						<li role="presentation">
+							<a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+						</li>
+
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content" style="border-top: 1px solid darkgray;margin-top:  -6px;">
+						<div role="tabpanel" class="tab-pane active" id="home" style="width: 980px;margin-left: 20px;">
+							<div><img src="assets/css/images/cx.png" style="float: left;margin-top: 7px;"><input type="text" style="float: left;margin:10px;" /></div>
+							<table id="myTable"></table>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="profile">sada</div>
+						<div role="tabpanel" class="tab-pane" id="messages">asd</div>
+						<div role="tabpanel" class="tab-pane" id="settings">asd</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="mc_workmanage_bottom" style="<!--background-color: greenyellow;-->height: 25%;overflow:hidden">
+				<div style="margin-top: 25px;">
+					<a href="#" data-toggle="modal" data-target="#myModal"><img src="assets/css/images/allwg.png" width="120px" height="120px" style="float: left;margin-left: 20px;"></a>
+					<a href="#"><img src="assets/css/images/wg.png" width="120px" height="120px" style="float: left;margin-left: 20px;"></a>
+					<a href="#"><img src="assets/css/images/kg.png" width="120px" height="120px" style="float: right;margin-right: 20px;"></a>
+				</div>
+				<!--model-->
+
+				<!-- 模态框（Modal） -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" style="width: 900px;">
+						<div class="modal-content">
+
+							<div class="modal-body">
+								<table id="tcTable"></table>
+							</div>
+							<div class="modal-footer">
+								<div style="float: left;"data-dismiss="modal"><img src="assets/css/images/qx.png"></div>
+								<div style="=float: right;" onclick="bg();"><img src="assets/css/images/bg.png"></div>
+								<!--  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>-->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal -->
+				</div>
+
+				<!--model-->
+			</div>
+		</div>
+		<div class="gd_bottom" style="height: 6.5%;background-color: rgb(153,153,153)"></div>
+		<script type="text/javascript">
+			function bg () {
+				alert("报工成功");
+			}
+			//获取设备站点代码
+			/*$(function() {
+				$.ajax(
+					type:"post",
+					url:"",
+					dataType:"json"
+					);
+			})*/
+			//tab选中样式
+			$(function() {
+				$("#myTab li:first").addClass("active");
+			});
+			//tab的方法
+			$(function() {
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+					// 获取已激活的标签页的名称
+					var activeTab = $(e.target).text();
+					//alert(activeTab);
+					console.log(activeTab);
+					// 获取前一个激活的标签页的名称
+					var previousTab = $(e.relatedTarget).text();
+					//alert(previousTab);
+					$(".active-tab span").html(activeTab);
+					$(".previous-tab span").html(previousTab);
+				});
+			});
+			//bootstrop-table
+			$("#tcTable").bootstrapTable({
+				striped: true, //隔行换色
+				columns: [{
+					field: 'id',
+					title: '生产日期'
+				}, {
+					field: 'name',
+					title: '工单号'
+				}, {
+					field: 'price',
+					title: '工件代码'
+				}, {
+					field: 'price',
+					title: '工件名称'
+				}, {
+					field: 'price',
+					title: '客户图号'
+				}, {
+					field: 'price',
+					title: '图号'
+				}, {
+					field: 'price',
+					title: '批号'
+				}, {
+					field: 'price',
+					title: '材料编号'
+				}, {
+					field: 'price',
+					title: '版本号'
+				}, {
+					field: 'price',
+					title: '站点代码'
+				}, {
+					field: 'price',
+					title: '计划数量'
+				}, {
+					field: 'price',
+					title: '完工数量'
+				}, {
+					field: 'price',
+					title: '报工数量'
+				}],
+				data: [{
+					id: 1,
+					name: 'Item 1',
+					price: ''
+				}, {
+					id: 2,
+					name: 'Item 2',
+					price: '$2'
+				}]
+			});
+			$("#myTable").bootstrapTable({
+				height:260,
+				singleSelect: true,
+				striped: true, //隔行换色
+				columns: [
+					{
+						field: 'id',
+						title: '生产日期'
+					}, {
+						field: 'name',
+						title: '工单号'
+					}, {
+						field: 'price',
+						title: '工件代码'
+					}, {
+						field: 'price',
+						title: '工件名称'
+					}, {
+						field: 'price',
+						title: '客户图号'
+					}, {
+						field: 'price',
+						title: '图号'
+					}, {
+						field: 'price',
+						title: '批号'
+					}, {
+						field: 'price',
+						title: '材料编号'
+					}, {
+						field: 'price',
+						title: '版本号'
+					}, {
+						field: 'price',
+						title: '计划数量'
+					}, {
+						field: 'price',
+						title: '状态'
+					}
+				],
+				data: [{
+					id: 1,
+					name: 'Item 1',
+					price: '$1'
+				}, {
+					id: 2,
+					name: 'Item 2',
+					price: '$2'
+				}]
+			});
+			//选中行
+			$("#myTable").on('click-row.bs.table', function(e, row, element) {
+				//alert(row.name);
+				$('.success').removeClass('success'); //去除之前选中的行的，选中样式
+				$(element).addClass('success'); //添加当前选中的 success样式用于区别
+			
+				
+				//alert(getSelectRows.id);
+				//console.log(getSelectRows);
+			});
+			
+		</script>
+
+	</body>
+
+</html>

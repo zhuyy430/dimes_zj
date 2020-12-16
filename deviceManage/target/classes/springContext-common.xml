@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 引入外部配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:sysConfig.properties</value>
+				<value>classpath:function.properties</value>
+				<value>classpath:workflow.properties</value>
+				<value>classpath:filepath.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置扫描包 -->
+	<context:component-scan
+		base-package="
+	com.digitzones.dao.impl
+	com.digitzones.service.impl
+	com.digitzones.devmgr.dao.impl
+	com.digitzones.devmgr.service.impl
+	com.digitzones.mc.dao.impl
+	com.digitzones.mc.service.impl
+	com.digitzones.procurement.dao.impl
+	com.digitzones.procurement.service.impl
+	com.digitzones.app.dao.impl
+	com.digitzones.app.service.impl
+	com.digitzones.config
+	com.digitzones.xml
+	com.digitzones.quartz
+	com.digitzones.security"/>
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="10" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="50" />
+		<property name="maxWait" value="60000" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+		<property name="filters" value="stat" />
+	</bean>
+	<!-- 配置hibernate sessionfactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.digitzones.model</value>
+				<value>com.digitzones.procurement.model</value>
+				<value>com.digitzones.devmgr.model</value>
+				<value>com.digitzones.app.model</value>
+				<value>com.digitzones.mc.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect
+				hibernate.show_sql=true
+				hibernate.hbm2ddl.auto=update
+			</value>
+		</property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="serviceOperation"
+			expression="execution(* com.digitzones.service.impl.*.*(..))
+			|| execution(* com.digitzones.devmgr.service.impl.*.*(..))
+			|| execution(* com.digitzones.mc.service.impl.*.*(..))
+			|| execution(* com.digitzones.app.service.impl.*.*(..))
+			|| execution(* com.digitzones.procurement.service.impl.*.*(..))
+" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="serviceOperation" />
+	</aop:config>
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="drop*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="upd*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="audit*" propagation="REQUIRED" />
+			<tx:method name="un*" propagation="REQUIRED" />
+			<tx:method name="confirm*" propagation="REQUIRED" />
+			<tx:method name="review*" propagation="REQUIRED" />
+			<tx:method name="receive*" propagation="REQUIRED" />
+			<tx:method name="recover*" propagation="REQUIRED" />
+			<tx:method name="lightout*" propagation="REQUIRED" />
+			<tx:method name="queryOrAdd*" propagation="REQUIRED" />
+			<tx:method name="log*" propagation="REQUIRED" />
+			<tx:method name="start*" propagation="REQUIRED" />
+			<tx:method name="stop*" propagation="REQUIRED" />
+			<tx:method name="complete*" propagation="REQUIRED" />
+			<tx:method name="disable*" propagation="REQUIRED" />
+			<tx:method name="imp*" propagation="REQUIRED" />
+			<tx:method name="exp*" propagation="REQUIRED" />
+			<tx:method name="out*" propagation="REQUIRED" />
+			<tx:method name="generate*" propagation="REQUIRED" />
+			<tx:method name="into*" propagation="REQUIRED" />
+			<tx:method name="fill*" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 定时器调度工厂bean -->
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+		<property name="jobFactory" ref="jobFactory" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<task:annotation-driven/>
+	<task:scheduled-tasks>
+		<!-- 设备点检定时任务，每天24时检查点检计划执行情况，更新点检记录状态-->
+		<task:scheduled ref="CheckingPlanTask" method="checkingPlanStatus" cron="0 59 23 * * ?"/>
+		<!-- 更新报修单状态如30min后仍没有分配则报警 -->
+		<!-- <task:scheduled ref="CheckingDeviceRepairTask" method="CheckingDeviceRepairTask" cron="0 * * * * ?"/> -->
+		<task:scheduled ref="CheckingDeviceRepairTask" method="CheckingDeviceRepairTaskAndPushMessage" cron="0 * * * * ?"/>
+	</task:scheduled-tasks>
+</beans>
+

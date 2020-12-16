@@ -1,0 +1,230 @@
+@charset "UTF-8";
+/* head顶部样式开始*/
+body {
+	margin: 0 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+#left {
+	float: left;
+	width: 28%;
+	height: 100%;
+	background-color: #F2F2F2;
+	margin-right: 5px;
+}
+
+#right {
+	width: 71%;
+	background-color: white;
+	height: 100%;
+	float: left;
+}
+
+.loadingModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+
+.container-top{
+	width: 100%;
+	height: 45px;
+	background-color: #999999;
+	float: none;
+}
+
+.container-top-bars{
+font-size: 35px; margin-left: 20px; color: white; text-align: center; cursor: pointer; line-height: 45px;
+}
+
+
+/* head顶部样式结束*/
+
+/* end底部样式开始 */
+.end{
+	width: 100%;margin-top:5px;height: 60px;background-color:#BEBFC3;
+}
+
+.end_bar {
+	text-align: center;
+	clear: both;
+	margin-top: 7px;
+}
+/* end底部样式开始 */
+
+/* 通用样式结束 */
+.tyPanelSize{
+	height: 631px; width: 100%; margin: auto;
+}
+
+.tytitle_t{
+	overflow: hidden; display: inline-block;margin-left: -165px;
+}
+
+.functionButton {
+	width: 110px;
+	height: 110px;
+	padding-top: 5px;
+	border: 2px solid darkgray;
+	border-radius: 16px;
+	margin-right: 20px;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+}
+
+.functionButton span{
+	font-size: 48px;
+}
+/* 通用样式结束 */
+
+/* main样式开始 */
+.mainfunctionButton {
+	width: 90px;
+	height: 90px;
+	border-radius: 10px;
+	float: left;
+	margin-top: 25px;
+	margin-right: 25px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.mainfunctionButton span{
+	font-size: 50px;
+}
+
+#myTask {
+	height: 200px;
+	margin-top: 30px;
+	width: 95%;
+	/* margin-left: 10px;
+	margin-right: 10px; */
+	margin-left: 2.5%;
+	margin-right: 2.5%
+}
+
+#myTask ul {
+	list-style-type: none;
+	color: #7C7C7C;
+}
+
+ul li {
+	margin-top: 5px;
+}
+
+ul li h4 {
+	display: inline;
+	margin-right: 3px;
+}
+
+.main_top{
+	background-color: #F2F2F2;
+	width: 100%; height: 50px;
+	margin-top: 5px;
+}
+
+#navbar{
+	float: right; height: 100%; vertical-align: center;
+}
+
+#navbar label{
+	background-color: #EFEFEF; margin-top: 5px; border: 1px solid #8F8F8F; padding: 5px 15px; color: #808080; font-size: 16px;
+}
+
+.main_center{
+	width: 100%; height: 571px; margin-top: 5px;
+}
+
+.main_center_left_top{
+	width: 100%; height: 300px;
+}
+
+.main_center_left_top ul{
+	list-style-type: none; margin-top: 10px;
+}
+
+.main_myTask_top{
+	text-align: center; width: 32.66%; height: 100%; float: left; border: 1px solid gray; margin-right: 1%;
+}
+#oeeDiv{
+	text-align: center; height: 40%; vertical-align: middle; border: 1px solid gray; width: 100%;margin-top: 1%;
+}
+
+.main_right_top{
+	width: 100%; height: 260px; background-color: #F2F2F2;
+}
+
+.main_right_top_line{
+	width: 100%; height: 115px; background-color: #F2F2F2;
+}
+
+.main_right_top_line_gap{
+	width: 24px; height: 90px; float: left;
+}
+
+.main_right_bottom{
+	height: 308px; width: 100%; margin-top: 5px; background-color: #F2F2F2;
+}
+
+#myChart{
+	width: 85%; height: 100%;float: left; background-color: white;
+}
+
+.main_myChart_button{
+	height: 80px;  margin-top: 58px; width: 80px; margin-left: 15px; border-radius: 10px;
+}
+
+.main_myChart_button_size{
+	font-size: 50px; line-height: 80px;
+}
+/* main样式结束 */
+
+
+
+
+/* employeeMapping样式开始 (装备关联) */
+
+.eq_center_left{
+	width: 320px; height: 525px; border: 2px solid darkgray; float: left; margin-top: 1.2%; margin-left: 1.5%;
+}
+.eq_center_left img{
+	width: 316px;height:290px;margin-bottom: 20px;
+}
+
+.eq_center_left p{
+	font-size: 20px;
+}
+
+.eq_center_right{
+	width: 650px;float: right;margin-top: 20px;margin-right: 1%;
+}
+
+/* employeeMapping样式结束 (装备关联) */
+
+
+/* measuringMapping样式开始 (装备关联) */
+
+
+.me_center_left{
+	width: 320px; height: 525px; border: 2px solid darkgray; float: left; margin-top: 1.2%; margin-left: 1.5%;
+}
+
+.me_center_left img{
+	width: 316px;height:290px;margin-bottom: 20px;
+}
+
+.me_center_left p{
+	font-size: 20px;
+}
+
+.me_center_right{
+	width: 650px;float: right;margin-top: 20px;margin-right: 1%;
+}
+
+/* measuringMapping样式结束 (装备关联) */
+

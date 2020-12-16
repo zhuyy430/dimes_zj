@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pics>
+	<pic type="logo">http://127.0.0.1:8080/board/pics/logo.JPG</pic>
+	<pic type="oeeTitle">http://127.0.0.1:8080/board/pics/oeeTitle.PNG</pic>
+	<pic type="outputTitle">http://127.0.0.1:8080/board/pics/outputTitle.PNG</pic>
+	<pic type="lowQualityTitle">http://127.0.0.1:8080/board/pics/lowQualityTitle.PNG</pic>
+	<pic type="empTitle">http://127.0.0.1:8080/board/pics/empTitle.PNG</pic>
+	<pic type="safetyCross">http://127.0.0.1:8080/board/pics/safetyCross.PNG</pic>
+	<pic type="errorProof">http://127.0.0.1:8080/board/pics/errorProof.PNG</pic>
+	<pic type="errorProofTitle">http://127.0.0.1:8080/board/pics/errorProofTitle.PNG</pic>
+	<pic type="empBody">http://127.0.0.1:8080/board/pics/empBody.PNG</pic>
+</pics>

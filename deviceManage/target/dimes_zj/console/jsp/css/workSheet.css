@@ -1,0 +1,23 @@
+#printTable tr{
+    height:20px;
+}
+
+#printTable tr td{
+    border-bottom:solid 1px #b3b3b3 ;
+    text-align: center;
+    width:30%;
+    font-size: 14px;
+}
+#printTable tr th{
+   text-align: right;
+    font-size: 18px;
+    width:20%;
+}
+
+#workSheetDetail4Print tr td,#workSheetDetail4Print tr th{
+    text-align:center;
+    border:solid 1px #b3b3b3;
+    font-size: 14px;
+    height:30px;
+}
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.digitzones.com">
+  <collaboration id="Collaboration">
+    <participant id="lostTimePool" name="损时流程" processRef="lostTimeWorkflow"></participant>
+  </collaboration>
+  <process id="lostTimeWorkflow" name="损时流程" isExecutable="true">
+    <laneSet id="laneSet_lostTimeWorkflow">
+      <lane id="employeeLane" name="操作工">
+        <flowNodeRef>lostTimeWorkflowStart</flowNodeRef>
+        <flowNodeRef>lostTimeApply</flowNodeRef>
+      </lane>
+      <lane id="confirmLane" name="确认人">
+        <flowNodeRef>confirm</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="lostTimeWorkflowStart" name="损时流程开始" activiti:initiator="applyUserId"></startEvent>
+    <sequenceFlow id="flow1" sourceRef="lostTimeApply" targetRef="confirm"></sequenceFlow>
+    <userTask id="confirm" name="确认" activiti:assignee="${lostTimeConfirmPerson}" activiti:candidateUsers="${lostTimeConfirmPersons}" activiti:candidateGroups="${lostTimeConfirmRoles}"></userTask>
+    <userTask id="lostTimeApply" name="损时申请" activiti:assignee="${applyUserId}"></userTask>
+    <sequenceFlow id="flow2" sourceRef="lostTimeWorkflowStart" targetRef="lostTimeApply"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="confirm" targetRef="endevent2"></sequenceFlow>
+    <endEvent id="endevent2" name="End"></endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="lostTimePool" id="BPMNShape_lostTimePool">
+        <omgdc:Bounds height="300.0" width="500.0" x="230.0" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="employeeLane" id="BPMNShape_employeeLane">
+        <omgdc:Bounds height="150.0" width="480.0" x="250.0" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="confirmLane" id="BPMNShape_confirmLane">
+        <omgdc:Bounds height="150.0" width="480.0" x="250.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lostTimeWorkflowStart" id="BPMNShape_lostTimeWorkflowStart">
+        <omgdc:Bounds height="35.0" width="35.0" x="320.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="confirm" id="BPMNShape_confirm">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lostTimeApply" id="BPMNShape_lostTimeApply">
+        <omgdc:Bounds height="55.0" width="105.0" x="285.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="320.0" y="430.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="337.0" y="225.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="290.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="337.0" y="145.0"></omgdi:waypoint>
+        <omgdi:waypoint x="337.0" y="170.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="342.0" y="345.0"></omgdi:waypoint>
+        <omgdi:waypoint x="337.0" y="430.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

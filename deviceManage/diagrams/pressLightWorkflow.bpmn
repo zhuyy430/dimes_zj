@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.digitzones.com">
+  <collaboration id="Collaboration">
+    <participant id="pressLightPool" name="按灯流程" processRef="pressLightWorkflow"></participant>
+  </collaboration>
+  <process id="pressLightWorkflow" name="按灯流程" isExecutable="true">
+    <laneSet id="laneSet_pressLightWorkflow">
+      <lane id="employee" name="操作工">
+        <flowNodeRef>pressLightProcessStart</flowNodeRef>
+      </lane>
+      <lane id="lightoutLane" name="熄灯人员">
+        <flowNodeRef>lightout</flowNodeRef>
+      </lane>
+      <lane id="recoverLane" name="恢复人员">
+        <flowNodeRef>recover</flowNodeRef>
+      </lane>
+      <lane id="confirmLane" name="确认人员">
+        <flowNodeRef>confirm</flowNodeRef>
+      </lane>
+    </laneSet>
+    <userTask id="lightout" name="熄灯" activiti:assignee="${lightoutPerson}" activiti:candidateUsers="${lightoutPersons}" activiti:candidateGroups="${lightoutRoles}"></userTask>
+    <startEvent id="pressLightProcessStart" name="按灯流程开始" activiti:initiator="applyUserId"></startEvent>
+    <sequenceFlow id="flow1" sourceRef="pressLightProcessStart" targetRef="lightout"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="lightout" targetRef="recover"></sequenceFlow>
+    <userTask id="recover" name="恢复" activiti:assignee="${lightoutRecoverPerson}" activiti:candidateUsers="${lightoutRecoverPersons}" activiti:candidateGroups="${lightoutRecoverRoles}"></userTask>
+    <sequenceFlow id="flow3" sourceRef="recover" targetRef="confirm"></sequenceFlow>
+    <userTask id="confirm" name="确认" activiti:assignee="${lightoutConfirmPerson}" activiti:candidateUsers="${lightoutConfirmPersons}" activiti:candidateGroups="${lightoutConfirmRoles}"></userTask>
+    <sequenceFlow id="flow4" sourceRef="confirm" targetRef="pressLightProcessEnd"></sequenceFlow>
+    <endEvent id="pressLightProcessEnd" name="按灯流程结束"></endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="pressLightPool" id="BPMNShape_pressLightPool">
+        <omgdc:Bounds height="431.0" width="570.0" x="180.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="employee" id="BPMNShape_employee">
+        <omgdc:Bounds height="107.0" width="550.0" x="200.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lightoutLane" id="BPMNShape_lightoutLane">
+        <omgdc:Bounds height="107.0" width="550.0" x="200.0" y="147.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="recoverLane" id="BPMNShape_recoverLane">
+        <omgdc:Bounds height="107.0" width="550.0" x="200.0" y="254.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="confirmLane" id="BPMNShape_confirmLane">
+        <omgdc:Bounds height="107.0" width="550.0" x="200.0" y="361.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lightout" id="BPMNShape_lightout">
+        <omgdc:Bounds height="55.0" width="105.0" x="240.0" y="162.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="pressLightProcessStart" id="BPMNShape_pressLightProcessStart">
+        <omgdc:Bounds height="35.0" width="35.0" x="280.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="recover" id="BPMNShape_recover">
+        <omgdc:Bounds height="55.0" width="105.0" x="240.0" y="274.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="confirm" id="BPMNShape_confirm">
+        <omgdc:Bounds height="55.0" width="105.0" x="240.0" y="380.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="pressLightProcessEnd" id="BPMNShape_pressLightProcessEnd">
+        <omgdc:Bounds height="35.0" width="35.0" x="273.0" y="480.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="297.0" y="105.0"></omgdi:waypoint>
+        <omgdi:waypoint x="292.0" y="162.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="292.0" y="217.0"></omgdi:waypoint>
+        <omgdi:waypoint x="292.0" y="274.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="292.0" y="329.0"></omgdi:waypoint>
+        <omgdi:waypoint x="292.0" y="380.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="292.0" y="435.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="480.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
